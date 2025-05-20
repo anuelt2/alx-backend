@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
 """A basic Flask app with Babel config"""
+from datetime import datetime
 import pytz
 from flask import Flask, render_template, request, g
-from flask_babel import Babel
+from flask_babel import Babel, format_datetime
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -30,7 +31,8 @@ babel = Babel(app)
 @app.route("/", methods=["GET"])
 def index():
     """index route"""
-    return render_template("7-index.html")
+    current_time = format_datetime(datetime.now(pytz.timezone(get_timezone())))
+    return render_template("index.html", current_time=current_time)
 
 
 @babel.localeselector
