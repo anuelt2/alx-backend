@@ -3,7 +3,6 @@
 
 from flask import Flask, render_template, request
 from flask_babel import Babel
-from flask.typing import ResponseReturnValue
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -22,13 +21,13 @@ babel = Babel(app)
 
 
 @app.route("/", methods=["GET"])
-def index() -> ResponseReturnValue:
+def index():
     """index route"""
     return render_template("3-index.html")
 
 
 @babel.localeselector
-def get_locale() -> str:
+def get_locale():
     """Determines the best match for supported languages"""
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
