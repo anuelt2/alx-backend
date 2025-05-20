@@ -1,7 +1,9 @@
 #!/usr/bin/env python3
 """A basic Flask app with Babel config"""
+
 from flask import Flask, render_template, request
 from flask_babel import Babel
+from flask.typing import ResponseReturnValue
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
@@ -20,13 +22,13 @@ babel = Babel(app)
 
 
 @app.route("/", methods=["GET"])
-def index():
+def index() -> ResponseReturnValue:
     """index route"""
     return render_template("3-index.html")
 
 
 @babel.localeselector
-def get_locale():
+def get_locale() -> str:
     """Determines the best match for supported languages"""
     return request.accept_languages.best_match(app.config["LANGUAGES"])
 
