@@ -22,7 +22,7 @@ babel = Babel(app)
 @app.route("/", methods=["GET"])
 def index():
     """index route"""
-    return render_template("2-index.html")
+    return render_template("3-index.html")
 
 
 @babel.localeselector
